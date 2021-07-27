@@ -33,8 +33,8 @@ function checkImg(element) {
     }
     else {
         if (element.querySelector('.card-back img').src !== memoryImg.querySelector('.card-back img').src) {
-            setTimeout(toggleImg(element), 1000);
-            setTimeout(toggleImg(memoryImg), 1000);
+            setTimeout(() => toggleImg(element), 1000);
+            setTimeout(() => toggleImg(memoryImg), 1000);
         }
         else {
             cardsFlipedCount = cardsFlipedCount + 2;

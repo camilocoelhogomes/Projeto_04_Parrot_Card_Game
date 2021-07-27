@@ -60,9 +60,7 @@ body {
   .hided{
     display: none;
   }
-  .delay{
-    transition-delay: 1s;
-  }
+  
   @media (max-width: 600px){
     .cards{
       display: block;
