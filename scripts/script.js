@@ -7,13 +7,19 @@ function howManyCards() {
         for (let i = 1; i <= Number(cards) - 1; i++) {
             let newCard = card.cloneNode(true);
             newCard.id = i;
-            console.log(newCard);
-            document.querySelector('.cards').createElement(newCard);
         }
     }
     else {
         howManyCards();
     }
+}
+
+function toggleImg(element) {
+    const imgs = element.querySelectorAll('.card-img');
+    imgs.forEach(i => i.classList.toggle('hided'));
+}
+function clickCard(element) {
+    toggleImg(element);
 }
 
 howManyCards();

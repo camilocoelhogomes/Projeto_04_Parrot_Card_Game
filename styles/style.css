@@ -20,18 +20,43 @@ body {
     width: 100%;
     align-items: center;
 }
-.card{
+.card {
     width: 117px;
     height: 146px;
-    margin: 17px;
+    position: relative;
+  }
+
+  .card-front {
+    width: 100%;
+    height: 100%;
     background-color: #A7E9AF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
     display: flex;
-    justify-content: center;
     align-items: center;
-    border: 1px solid #99cea8;
-    border-radius: 5px;
-}
-.card-front{
+    justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+  }
+
+  .card-back {
+    transform: rotateY(180deg);
+  }
+
+  .card:active .card-back {
+    transform: rotateY(0deg);
+  }
+
+  .card:active .card-front {
+    transform: rotateY(-180deg);
+  }
+  .card-img{
+    width: 100px;
     height: 100px;
-    margin: auto;
-}
+  }
+  .hided{
+    transition: all .5s;
+    display: none;
+  }
