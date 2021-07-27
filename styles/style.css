@@ -24,7 +24,7 @@ body {
     width: 117px;
     height: 146px;
     position: relative;
-    margin: 17px;
+    margin: 34px;
   }
 
   .card-front {
@@ -62,4 +62,12 @@ body {
   }
   .delay{
     transition-delay: 1s;
+  }
+  @media (max-width: 600px){
+    .cards{
+      display: block;
+    }
+    .card{
+      margin: 34px auto
+    }
   }
