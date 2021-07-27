@@ -24,6 +24,7 @@ body {
     width: 117px;
     height: 146px;
     position: relative;
+    margin: 17px;
   }
 
   .card-front {
