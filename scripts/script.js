@@ -1,4 +1,4 @@
-let cards;
+let cards = 0;
 
 function howManyCards() {
     cards = prompt(`Quantas cartas quer utilizat?\nPor favor entre um número par entre 4 e 14`);
@@ -7,7 +7,6 @@ function howManyCards() {
         const card = document.querySelector('.card');
         for (let i = 1; i <= Number(cards) - 1; i++) {
             let newCard = card.cloneNode(true);
-            newCard.id = i;
             document.querySelector('.cards').appendChild(newCard);
         }
     }
@@ -25,4 +24,23 @@ function clickCard(element) {
     toggleImg(element);
 }
 
+// Esta função pode ficar separada do código acima, onde você preferir
+function shuffleBackGround() {
+    return Math.random() - 0.5;
+}
+
+function changeBackgroundImg() {
+    let backGrounds = [];
+
+    for (let i = 0; i <= (cards / 2) - 1; i++) {
+        backGrounds.push(i)
+    }
+
+    backGrounds = backGrounds.concat(backGrounds);
+    backGrounds.sort(shuffleBackGround);
+    const allCards = document.querySelectorAll('.card');
+    allCards.forEach((i, k) => i.querySelector('.card-back img').src = `./img/${backGrounds[k]}.gif`)
+}
+
 howManyCards();
+changeBackgroundImg();
