@@ -58,6 +58,8 @@ body {
     height: 100px;
   }
   .hided{
-    transition: all .5s;
     display: none;
+  }
+  .delay{
+    transition-delay: 1s;
   }

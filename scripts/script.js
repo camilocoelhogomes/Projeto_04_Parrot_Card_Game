@@ -10,6 +10,7 @@ function howManyCards() {
         const card = document.querySelector('.card');
         for (let i = 1; i <= Number(cards) - 1; i++) {
             let newCard = card.cloneNode(true);
+            newCard.id = i;
             document.querySelector('.cards').appendChild(newCard);
         }
     }
@@ -27,15 +28,18 @@ function checkImg(element) {
     if (clickCount % 2 === 1) {
         memoryImg = element;
     }
+    else if (element.id === memoryImg.id) {
+
+    }
     else {
         if (element.querySelector('.card-back img').src !== memoryImg.querySelector('.card-back img').src) {
-            toggleImg(element)
-            toggleImg(memoryImg)
+            setTimeout(toggleImg(element), 1000);
+            setTimeout(toggleImg(memoryImg), 1000);
         }
         else {
             cardsFlipedCount = cardsFlipedCount + 2;
             if (cardsFlipedCount === Number(cards)) {
-                alert(`Você Ganhou em ${clickCount} jogadas`);
+                alert(`Você Ganhou em ${clickCount / 2} jogadas`);
 
             }
         }
