@@ -29,13 +29,14 @@ function checkImg(element) {
     }
     else {
         if (element.querySelector('.card-back img').src !== memoryImg.querySelector('.card-back img').src) {
-            setTimeout(toggleImg(element), 1000);
-            setTimeout(toggleImg(memoryImg), 1000);
+            toggleImg(element)
+            toggleImg(memoryImg)
         }
         else {
             cardsFlipedCount = cardsFlipedCount + 2;
             if (cardsFlipedCount === Number(cards)) {
-                alert(`Você Ganhou em ${clickCount} jogadas`)
+                alert(`Você Ganhou em ${clickCount} jogadas`);
+
             }
         }
     }
