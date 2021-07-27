@@ -23,7 +23,12 @@ function toggleImg(element) {
     const imgs = element.querySelectorAll('.card-img');
     imgs.forEach(i => i.classList.toggle('hided'));
 }
-
+function playAgain() {
+    const play = prompt('Quer Jogar de Novo?');
+    if (play === 'sim') {
+        location.reload();
+    }
+}
 function checkImg(element) {
     if (clickCount % 2 === 1) {
         memoryImg = element;
@@ -40,7 +45,7 @@ function checkImg(element) {
             cardsFlipedCount = cardsFlipedCount + 2;
             if (cardsFlipedCount === Number(cards)) {
                 alert(`Você Ganhou em ${clickCount / 2} jogadas`);
-
+                playAgain();
             }
         }
     }
