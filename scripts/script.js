@@ -1,4 +1,7 @@
 let cards = 0;
+let clickCount = 0;
+let cardsFlipedCount = 0;
+let memoryImg;
 
 function howManyCards() {
     cards = prompt(`Quantas cartas quer utilizat?\nPor favor entre um número par entre 4 e 14`);
@@ -20,8 +23,28 @@ function toggleImg(element) {
     imgs.forEach(i => i.classList.toggle('hided'));
 }
 
+function checkImg(element) {
+    if (clickCount % 2 === 1) {
+        memoryImg = element;
+    }
+    else {
+        if (element.querySelector('.card-back img').src !== memoryImg.querySelector('.card-back img').src) {
+            setTimeout(toggleImg(element), 1000);
+            setTimeout(toggleImg(memoryImg), 1000);
+        }
+        else {
+            cardsFlipedCount = cardsFlipedCount + 2;
+            if (cardsFlipedCount === Number(cards)) {
+                alert(`Você Ganhou em ${clickCount} jogadas`)
+            }
+        }
+    }
+}
+
 function clickCard(element) {
+    clickCount = clickCount + 1;
     toggleImg(element);
+    checkImg(element);
 }
 
 // Esta função pode ficar separada do código acima, onde você preferir
