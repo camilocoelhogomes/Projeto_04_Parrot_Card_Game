@@ -61,6 +61,7 @@ function checkImg(element) {
         }
         else {
             cardsFlipedCount = cardsFlipedCount + 2;
+            console.log(cardsFlipedCount);
             if (cardsFlipedCount === Number(cards)) {
                 alert(`Você Ganhou em ${clickCount} jogadas`);
                 playAgain();
@@ -68,11 +69,20 @@ function checkImg(element) {
         }
     }
 }
+function countCardsFlipled() {
+    const allCards = document.querySelectorAll('.card');
+    let count = 0;
+    allCards.forEach(iten => iten.querySelector('.card-front img').classList.contains('hided') ? count++ : '');
+    console.log(count);
+    return (count < cardsFlipedCount + 2) ? true : false;
+}
 
 function clickCard(element) {
-    clickCount = clickCount + 1;
-    toggleImg(element);
-    checkImg(element);
+    if (countCardsFlipled()) {
+        clickCount = clickCount + 1;
+        toggleImg(element);
+        checkImg(element);
+    }
 }
 
 howManyCards();
