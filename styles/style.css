@@ -42,11 +42,12 @@ body {
     transform-style: preserve-3d;
   }
 
-  .card-back {
+
+  .card-back-click {
     transform: rotateY(180deg);
   }
 
-  .card:active .card-back {
+  .card-front-click {
     transform: rotateY(0deg);
   }
 
@@ -56,6 +57,7 @@ body {
   .card-img{
     width: 100px;
     height: 100px;
+    z-index: 1;
   }
   .hided{
     display: none;

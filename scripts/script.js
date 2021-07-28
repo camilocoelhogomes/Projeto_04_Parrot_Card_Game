@@ -23,10 +23,10 @@ function howManyCards() {
             allCards = allCards +
                 `<div class="card" id='${i}' onclick="clickCard(this)">
                     <div class="card-front">
-                        <img class="card-img delay" src="./img/front.png" alt="parrot">
+                        <img class="card-img" src="./img/front.png" alt="parrot">
                     </div>
                     <div class="card-back">
-                        <img class="card-img delay hided" src="./img/${backGrounds[i]}.gif" alt="">
+                        <img class="card-img hided" src="./img/${backGrounds[i]}.gif" alt="">
                     </div>
                 </div>`
         }
@@ -40,6 +40,8 @@ function howManyCards() {
 function toggleImg(element) {
     const imgs = element.querySelectorAll('.card-img');
     imgs.forEach(i => i.classList.toggle('hided'));
+    element.querySelector('.card-front').classList.toggle('card-front-click');
+    element.querySelector('.card-back').classList.toggle('card-back-click');
 }
 function playAgain() {
     const play = prompt('Quer Jogar de Novo?');
@@ -54,20 +56,19 @@ function checkImg(element) {
     else if (element.id === memoryImg.id) {
 
     }
+    else if (element.querySelector('.card-back img').src !== memoryImg.querySelector('.card-back img').src) {
+        setTimeout(() => toggleImg(element), 1000);
+        setTimeout(() => toggleImg(memoryImg), 1000);
+    }
     else {
-        if (element.querySelector('.card-back img').src !== memoryImg.querySelector('.card-back img').src) {
-            setTimeout(() => toggleImg(element), 1000);
-            setTimeout(() => toggleImg(memoryImg), 1000);
-        }
-        else {
-            cardsFlipedCount = cardsFlipedCount + 2;
-            console.log(cardsFlipedCount);
-            if (cardsFlipedCount === Number(cards)) {
-                alert(`Você Ganhou em ${clickCount} jogadas`);
-                playAgain();
-            }
+        cardsFlipedCount = cardsFlipedCount + 2;
+        console.log(cardsFlipedCount);
+        if (cardsFlipedCount === Number(cards)) {
+            alert(`Você Ganhou em ${clickCount} jogadas`);
+            playAgain();
         }
     }
+
 }
 function countCardsFlipled() {
     const allCards = document.querySelectorAll('.card');
