@@ -3,16 +3,34 @@ let clickCount = 0;
 let cardsFlipedCount = 0;
 let memoryImg;
 
+function shuffleBackGround() {
+    return Math.random() - 0.5;
+}
+
+
 function howManyCards() {
     cards = prompt(`Quantas cartas quer utilizat?\nPor favor entre um número par entre 4 e 14`);
 
     if (Number(cards) && Number.isInteger(Number(cards)) && (Number(cards) >= 4 || Number(cards) <= 14) && (Number(cards) % 2 === 0)) {
-        const card = document.querySelector('.card');
-        for (let i = 1; i <= Number(cards) - 1; i++) {
-            let newCard = card.cloneNode(true);
-            newCard.id = i;
-            document.querySelector('.cards').appendChild(newCard);
+        let backGrounds = [];
+        for (let i = 0; i <= (cards / 2) - 1; i++) {
+            backGrounds.push(i)
         }
+        backGrounds = backGrounds.concat(backGrounds);
+        backGrounds.sort(shuffleBackGround);
+        let allCards = '';
+        for (let i = 0; i < Number(cards); i++) {
+            allCards = allCards +
+                `<div class="card" id='${i}' onclick="clickCard(this)">
+                    <div class="card-front">
+                        <img class="card-img delay" src="./img/front.png" alt="parrot">
+                    </div>
+                    <div class="card-back">
+                        <img class="card-img delay hided" src="./img/${backGrounds[i]}.gif" alt="">
+                    </div>
+                </div>`
+        }
+        document.querySelector('.cards').innerHTML = allCards;
     }
     else {
         howManyCards();
@@ -44,7 +62,7 @@ function checkImg(element) {
         else {
             cardsFlipedCount = cardsFlipedCount + 2;
             if (cardsFlipedCount === Number(cards)) {
-                alert(`Você Ganhou em ${clickCount / 2} jogadas`);
+                alert(`Você Ganhou em ${clickCount} jogadas`);
                 playAgain();
             }
         }
@@ -57,23 +75,7 @@ function clickCard(element) {
     checkImg(element);
 }
 
-// Esta função pode ficar separada do código acima, onde você preferir
-function shuffleBackGround() {
-    return Math.random() - 0.5;
-}
-
-function changeBackgroundImg() {
-    let backGrounds = [];
-
-    for (let i = 0; i <= (cards / 2) - 1; i++) {
-        backGrounds.push(i)
-    }
-
-    backGrounds = backGrounds.concat(backGrounds);
-    backGrounds.sort(shuffleBackGround);
-    const allCards = document.querySelectorAll('.card');
-    allCards.forEach((i, k) => i.querySelector('.card-back img').src = `./img/${backGrounds[k]}.gif`)
-}
-
 howManyCards();
-changeBackgroundImg();
+
+
+
