@@ -70,16 +70,15 @@ function checkImg(element) {
     }
 
 }
-function countCardsFlipled() {
-    const allCards = document.querySelectorAll('.card');
+function countCardsFlipled(element) {
+    const allCards = element.parentNode.querySelectorAll('.cards');
     let count = 0;
     allCards.forEach(iten => iten.querySelector('.card-front img').classList.contains('hided') ? count++ : '');
-    console.log(count);
     return (count < cardsFlipedCount + 2) ? true : false;
 }
 
 function clickCard(element) {
-    if (countCardsFlipled()) {
+    if (countCardsFlipled(element)) {
         clickCount = clickCount + 1;
         toggleImg(element);
         checkImg(element);
