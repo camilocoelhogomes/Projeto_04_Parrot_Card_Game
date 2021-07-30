@@ -9,7 +9,6 @@ function shuffleBackGround() {
     return Math.random() - 0.5;
 }
 
-
 function howManyCards() {
     cards = prompt(`Quantas cartas quer utilizat?\nPor favor entre um número par entre 4 e 14`);
 
@@ -21,7 +20,7 @@ function howManyCards() {
         backGrounds = backGrounds.concat(backGrounds);
         backGrounds.sort(shuffleBackGround);
         let allCards = '';
-        for (let i = 0; i < Number(cards); i++) {
+        for (let i = 0, stop = Number(cards); i < stop; i++) {
             allCards = allCards +
                 `<div class="card" id='${i}' onclick="clickCard(this)">
                     <div class="card-front">
@@ -48,9 +47,9 @@ function millisToMinutesAndSeconds(millis) {
 
 function timerOutPut() {
     timeCounter++;
-    let output = millisToMinutesAndSeconds(timeCounter)
     document.querySelector('h2').innerHTML = millisToMinutesAndSeconds(timeCounter);
 }
+
 function timer() {
     timeKiller = setInterval(timerOutPut, 1000);
 }
@@ -61,6 +60,7 @@ function toggleImg(element) {
     element.querySelector('.card-front').classList.toggle('card-front-click');
     element.querySelector('.card-back').classList.toggle('card-back-click');
 }
+
 function playAgain() {
     const play = prompt('Quer Jogar de Novo?');
     if (play === 'sim') {
@@ -68,12 +68,10 @@ function playAgain() {
         howManyCards();
     }
 }
+
 function checkImg(element) {
     if (clickCount % 2 === 1) {
         memoryImg = element;
-    }
-    else if (element.id === memoryImg.id) {
-
     }
     else if (element.querySelector('.card-back img').src !== memoryImg.querySelector('.card-back img').src) {
         setTimeout(() => toggleImg(element), 1000);
@@ -83,17 +81,17 @@ function checkImg(element) {
         cardsFlipedCount = cardsFlipedCount + 2;
         if (cardsFlipedCount === Number(cards)) {
             clearInterval(timeKiller);
-            alert(`Você Ganhou em ${clickCount} jogadas`);
+            alert(`Você Ganhou em ${clickCount} jogadas e em ${millisToMinutesAndSeconds(timeCounter)} tempo`);
             playAgain();
         }
     }
 
 }
+
 function countCardsFlipled(element) {
     const allCards = element.parentNode.querySelectorAll('.card');
     let count = 0;
     allCards.forEach(iten => iten.querySelector('.card-front img').classList.contains('hided') ? count++ : '');
-    console.log(count);
     return (count < cardsFlipedCount + 2) ? true : false;
 }
 
@@ -106,6 +104,3 @@ function clickCard(element) {
 }
 
 howManyCards();
-
-
-
