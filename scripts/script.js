@@ -1,17 +1,18 @@
 let cards = 0;
 let clickCount = 0;
 let cardsFlipedCount = 0;
-let memoryImg;
 let timeCounter = 0;
+let memoryImg;
 let timeKiller;
-
+const player = [];
 function shuffleBackGround() {
     return Math.random() - 0.5;
 }
 
 function howManyCards() {
+    player.push([prompt('Qual o seu nome?')])
     cards = prompt(`Quantas cartas quer utilizat?\nPor favor entre um número par entre 4 e 14`);
-
+    player[player.length - 1].push(cards);
     if (Number(cards) && Number.isInteger(Number(cards)) && (Number(cards) >= 4 || Number(cards) <= 14) && (Number(cards) % 2 === 0)) {
         let backGrounds = [];
         for (let i = 0; i <= (cards / 2) - 1; i++) {
@@ -64,9 +65,16 @@ function toggleImg(element) {
 function playAgain() {
     const play = prompt('Quer Jogar de Novo?');
     if (play === 'sim') {
+        cards = 0;
+        clickCount = 0;
+        cardsFlipedCount = 0;
         timeCounter = 0;
         howManyCards();
     }
+}
+
+function score(numCards, time, clicks) {
+    return 10 ** (numCards * 10 / (time * clicks));
 }
 
 function checkImg(element) {
@@ -81,6 +89,8 @@ function checkImg(element) {
         cardsFlipedCount = cardsFlipedCount + 2;
         if (cardsFlipedCount === Number(cards)) {
             clearInterval(timeKiller);
+            player[player.length - 1].push(timeCounter);
+            player[player.length - 1].push(score(cards, timeCounter, clickCount));
             alert(`Você Ganhou em ${clickCount} jogadas e em ${millisToMinutesAndSeconds(timeCounter)} tempo`);
             playAgain();
         }
