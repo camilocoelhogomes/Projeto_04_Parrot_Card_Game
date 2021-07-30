@@ -79,7 +79,7 @@ function checkImg(element) {
         setTimeout(() => toggleImg(element), 1000);
         setTimeout(() => toggleImg(memoryImg), 1000);
     }
-    else {
+    else if (element.querySelector('.card-back img').src === memoryImg.querySelector('.card-back img').src && element.id !== memoryImg.id) {
         cardsFlipedCount = cardsFlipedCount + 2;
         if (cardsFlipedCount === Number(cards)) {
             clearInterval(timeKiller);
@@ -92,14 +92,13 @@ function checkImg(element) {
 function countCardsFlipled(element) {
     const allCards = element.parentNode.querySelectorAll('.card');
     let count = 0;
-
     allCards.forEach(iten => iten.querySelector('.card-front img').classList.contains('hided') ? count++ : '');
-
+    console.log(count);
     return (count < cardsFlipedCount + 2) ? true : false;
 }
 
 function clickCard(element) {
-    if (countCardsFlipled(element)) {
+    if (countCardsFlipled(element) && !element.querySelector('.card-front img').classList.contains('hided')) {
         clickCount = clickCount + 1;
         toggleImg(element);
         checkImg(element);
