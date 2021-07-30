@@ -92,8 +92,9 @@ function checkImg(element) {
 function countCardsFlipled(element) {
     const allCards = element.parentNode.querySelectorAll('.card');
     let count = 0;
+
     allCards.forEach(iten => iten.querySelector('.card-front img').classList.contains('hided') ? count++ : '');
-    console.log(count);
+
     return (count < cardsFlipedCount + 2) ? true : false;
 }
 
