@@ -2,6 +2,8 @@ let cards = 0;
 let clickCount = 0;
 let cardsFlipedCount = 0;
 let memoryImg;
+let timeCounter = 0;
+let timeKiller;
 
 function shuffleBackGround() {
     return Math.random() - 0.5;
@@ -31,10 +33,26 @@ function howManyCards() {
                 </div>`
         }
         document.querySelector('.cards').innerHTML = allCards;
+        timer();
     }
     else {
         howManyCards();
     }
+}
+
+function millisToMinutesAndSeconds(millis) {
+    let minutes = Math.floor(millis / 60);
+    let seconds = ((millis % 60) / 1).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
+function timerOutPut() {
+    timeCounter++;
+    let output = millisToMinutesAndSeconds(timeCounter)
+    document.querySelector('h2').innerHTML = millisToMinutesAndSeconds(timeCounter);
+}
+function timer() {
+    timeKiller = setInterval(timerOutPut, 1000);
 }
 
 function toggleImg(element) {
@@ -46,7 +64,8 @@ function toggleImg(element) {
 function playAgain() {
     const play = prompt('Quer Jogar de Novo?');
     if (play === 'sim') {
-        location.reload();
+        timeCounter = 0;
+        howManyCards();
     }
 }
 function checkImg(element) {
@@ -62,8 +81,8 @@ function checkImg(element) {
     }
     else {
         cardsFlipedCount = cardsFlipedCount + 2;
-        console.log(cardsFlipedCount);
         if (cardsFlipedCount === Number(cards)) {
+            clearInterval(timeKiller);
             alert(`Você Ganhou em ${clickCount} jogadas`);
             playAgain();
         }
@@ -71,9 +90,10 @@ function checkImg(element) {
 
 }
 function countCardsFlipled(element) {
-    const allCards = element.parentNode.querySelectorAll('.cards');
+    const allCards = element.parentNode.querySelectorAll('.card');
     let count = 0;
     allCards.forEach(iten => iten.querySelector('.card-front img').classList.contains('hided') ? count++ : '');
+    console.log(count);
     return (count < cardsFlipedCount + 2) ? true : false;
 }
 

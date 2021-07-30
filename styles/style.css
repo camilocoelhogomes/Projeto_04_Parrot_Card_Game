@@ -45,14 +45,17 @@ body {
 
   .card-back-click {
     transform: rotateY(180deg);
+    transition: all .5s;
   }
 
   .card-front-click {
     transform: rotateY(0deg);
+    transition: all .5s;
   }
 
   .card:active .card-front {
     transform: rotateY(-180deg);
+    transition: all .5s;
   }
   .card-img{
     width: 100px;
