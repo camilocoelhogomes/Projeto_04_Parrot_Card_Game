@@ -27,8 +27,8 @@ function howManyCards() {
                     <div class="card-front">
                         <img class="card-img" src="./img/front.png" alt="parrot">
                     </div>
-                    <div class="card-back">
-                        <img class="card-img hided" src="./img/${backGrounds[i]}.gif" alt="">
+                    <div class="card-back hided">
+                        <img class="card-img" src="./img/${backGrounds[i]}.gif" alt="">
                     </div>
                 </div>`
         }
@@ -56,10 +56,8 @@ function timer() {
 }
 
 function toggleImg(element) {
-    const imgs = element.querySelectorAll('.card-img');
-    imgs.forEach(i => i.classList.toggle('hided'));
-    element.querySelector('.card-front').classList.toggle('card-front-click');
-    element.querySelector('.card-back').classList.toggle('card-back-click');
+    element.querySelector('.card-front').classList.toggle('hided');
+    element.querySelector('.card-back').classList.toggle('hided');
 }
 
 function playAgain() {
