@@ -74,7 +74,7 @@ function playAgain() {
 }
 
 function scoreCard(numCards, time, clicks) {
-    score = 10 ** (numCards * 10 / (time * clicks));
+    score = (numCards * 10) ** (numCards * 10 / (time * clicks));
     players.push({
         player: player,
         numberCards: numCards,
