@@ -92,16 +92,17 @@ body {
     opacity: 0;
     transform: rotateY(180deg);
   }
-
-  .score-card{
-
-  }
   
   @media (max-width: 600px){
     .cards{
       display: block;
     }
+
     .card{
       margin: 34px auto
+    }
+
+    .score-card{
+      display: none;
     }
   }
