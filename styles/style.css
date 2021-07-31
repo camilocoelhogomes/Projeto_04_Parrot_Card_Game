@@ -11,6 +11,28 @@ body {
     color: #75B79E;
     padding: 0 10%;
 }
+
+.container {
+    display: flex;
+   justify-content: space-between;
+}
+
+.score-card{
+    font-size: 20px;
+    width: 200px;
+    border-radius: 10px;
+    border: 5px solid #75B79E;
+}
+.score-game{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 10px 0;
+}
+
+.score-game:nth-child(2n) {
+    background-color: #fff;
+}
+
 .cards{
     display: flex;
     flex-wrap: wrap;
@@ -20,6 +42,7 @@ body {
     width: 100%;
     align-items: center;
 }
+
 .card {
     width: 117px;
     height: 146px;
@@ -42,6 +65,7 @@ body {
     border-radius: 10px;
     box-shadow: 1px 1px 1px rgba(0,0,0,.3);
   }
+
   .card-back {
     width: 100%;
     height: 100%;
@@ -56,15 +80,21 @@ body {
     border-radius: 10px;
     box-shadow: 1px 1px 1px rgba(0,0,0,.3);
   }
+
   .card-img{
     width: 100px;
     height: 100px;
     z-index: 1;
   }
+
   .hided{
     transition: transform 0.5s;
     opacity: 0;
     transform: rotateY(180deg);
+  }
+
+  .score-card{
+
   }
   
   @media (max-width: 600px){

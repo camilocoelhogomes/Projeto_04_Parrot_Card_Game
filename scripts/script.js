@@ -4,15 +4,17 @@ let cardsFlipedCount = 0;
 let timeCounter = 0;
 let memoryImg;
 let timeKiller;
-const player = [];
+let player;
+let score;
+const players = [];
+
 function shuffleBackGround() {
     return Math.random() - 0.5;
 }
 
 function howManyCards() {
-    player.push([prompt('Qual o seu nome?')])
+    player = prompt('Qual o seu nome?');
     cards = prompt(`Quantas cartas quer utilizat?\nPor favor entre um número par entre 4 e 14`);
-    player[player.length - 1].push(cards);
     if (Number(cards) && Number.isInteger(Number(cards)) && (Number(cards) >= 4 || Number(cards) <= 14) && (Number(cards) % 2 === 0)) {
         let backGrounds = [];
         for (let i = 0; i <= (cards / 2) - 1; i++) {
@@ -71,8 +73,25 @@ function playAgain() {
     }
 }
 
-function score(numCards, time, clicks) {
-    return 10 ** (numCards * 10 / (time * clicks));
+function scoreCard(numCards, time, clicks) {
+    score = 10 ** (numCards * 10 / (time * clicks));
+    players.push({
+        player: player,
+        numberCards: numCards,
+        time: time,
+        clicks: clicks,
+        score: score
+    });
+    players.sort((a, b) => b.score - a.score);
+    let scoreCardHTML = '<li class = "score-game">Placar</li>';
+    players.forEach(item => scoreCardHTML += `
+        <li class='score-game'>
+            <p>${item.player}</p>
+            <p>${item.score.toFixed(2)}</p>
+        </li>
+    `);
+    console.log(scoreCardHTML);
+    document.querySelector('.score-card').innerHTML = scoreCardHTML;
 }
 
 function checkImg(element) {
@@ -87,10 +106,11 @@ function checkImg(element) {
         cardsFlipedCount = cardsFlipedCount + 2;
         if (cardsFlipedCount === Number(cards)) {
             clearInterval(timeKiller);
-            player[player.length - 1].push(timeCounter);
-            player[player.length - 1].push(score(cards, timeCounter, clickCount));
-            alert(`Você Ganhou em ${clickCount} jogadas e em ${millisToMinutesAndSeconds(timeCounter)} tempo`);
-            playAgain();
+            scoreCard(cards, timeCounter, clickCount);
+            setTimeout(() => {
+                alert(`Você Ganhou em ${clickCount} jogadas, em ${millisToMinutesAndSeconds(timeCounter)} segundos fazendo uma pontuação de ${score.toFixed(2)} `);
+                playAgain();
+            }, 1000);
         }
     }
 
@@ -104,7 +124,7 @@ function countCardsFlipled(element) {
 }
 
 function clickCard(element) {
-    if (countCardsFlipled(element) && !element.querySelector('.card-front img').classList.contains('hided')) {
+    if (countCardsFlipled(element) && !element.querySelector('.card-front').classList.contains('hided')) {
         clickCount = clickCount + 1;
         toggleImg(element);
         checkImg(element);
