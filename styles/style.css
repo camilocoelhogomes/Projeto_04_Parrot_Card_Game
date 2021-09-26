@@ -94,14 +94,19 @@ body {
   }
   
   @media (max-width: 600px){
-    .cards{
-      display: block;
+    .main{
+      font-size: 20px;
     }
-
     .card{
-      margin: 34px auto
+      margin: 8px auto;
+      width: 87px;
+      height: 110px;
     }
-
+    .card-img{
+      width: 80%;
+      height: 80%;
+      z-index: 1;
+    }
     .score-card{
       display: none;
     }
